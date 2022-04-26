@@ -1,0 +1,26 @@
+version: '3'
+services:
+  db:
+    image: sogis/oereb-db:2
+    environment:
+      POSTGRES_DB: oereb
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_HOST_AUTH_METHOD: md5
+      PG_WRITE_PWD: ddluser
+      PG_READ_PWD: dmluser
+      PG_GRETL_PWD: gretl
+    ports:
+      - "54323:5432"
+  web-service:
+    image: sogis/oereb-web-service:2
+    environment:
+      DBURL: jdbc:postgresql://db/oereb
+      DBUSR: gretl
+      DBPWD: gretl
+      DBSCHEMA: live
+      TMPDIR: /tmp
+      MININTERSECTION: 0.1
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
