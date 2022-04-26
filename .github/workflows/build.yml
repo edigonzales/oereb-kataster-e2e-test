@@ -28,7 +28,7 @@ jobs:
         run: docker-compose -f "docker-compose.yml" up -d
 
       - name: Wait for database
-        run: ./wait-for-it.sh localhost:54323 -t 60 -- exit 0
+        run: ./wait-for-it.sh localhost:54323 -t 60 -- sleep 1
 
       - name: Stop containers
         if: always()
