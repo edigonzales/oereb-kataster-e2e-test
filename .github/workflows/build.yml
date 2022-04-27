@@ -32,7 +32,7 @@ jobs:
 
       - name: Stop containers
         #if: always()
-        if: ${{ success() }}
+        if: ${{ success() }} 
         run: docker-compose -f "docker-compose.yml" down
 
 
