@@ -44,7 +44,7 @@ public class wait_for_database {
                 System.err.println();
                 System.err.println("-t       Timeout in seconds (default=60).");
                 System.err.println("-h       Host under test (default=localhost).");
-                System.err.println("-p       Host under test (default=localhost).");
+                System.err.println("-p       Port under test (default=5432).");
                 System.err.println("-d       Database name.");
                 System.err.println("-U       Database username.");
                 System.err.println("-W       Password");
