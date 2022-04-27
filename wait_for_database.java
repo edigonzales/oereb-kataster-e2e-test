@@ -2,23 +2,10 @@
 //REPOS mavenCentral
 //DEPS org.postgresql:postgresql:42.3.4 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PushbackReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 public class wait_for_database {
 
@@ -30,8 +17,6 @@ public class wait_for_database {
         String database = null;
         String user = null;
         String password = null;
-        String query = "select version()";
-
 
         int argi = 0;
         for(;argi<args.length;argi++) {

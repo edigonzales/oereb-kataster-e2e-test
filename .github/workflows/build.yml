@@ -28,7 +28,7 @@ jobs:
         run: docker-compose -f "docker-compose.yml" up -d
 
       - name: Wait for database
-        run: ./wait-for-it.sh localhost:54323 -t 60 -- sleep 1
+        run: curl -Ls https://sh.jbang.dev | bash -s - wait_for_database.java -h localhost -p 54323 -d oereb -U gretl -W gretl
 
       - name: Stop containers
         if: always()
