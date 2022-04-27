@@ -74,15 +74,20 @@ public class wait_for_database {
         int timeoutInt = Integer.valueOf(timeout);
         int sleeptimeInt = Integer.valueOf(sleeptime);
         int i=0;
+        boolean connected = false;
         while ((timeoutInt - i*sleeptimeInt) >= 0) {
             try (Connection conn = DriverManager.getConnection(dburl, user, password);) {
                 System.out.println("Connection successful.");
+                connected = true;
                 break;
             } catch (SQLException e) {
                 System.err.println((timeoutInt - i*sleeptimeInt) + "s: " + e.getMessage());
             }
             Thread.sleep(sleeptimeInt * 1000);
             i++;
+        }
+        if (connected == false) {
+            System.exit(1);
         }
     }
 }

@@ -24,8 +24,8 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           
-      - name: Start containers
-        run: docker-compose -f "docker-compose.yml" up -d
+      # - name: Start containers
+      #   run: docker-compose -f "docker-compose.yml" up -d
 
       - name: Wait for database
         run: curl -Ls https://sh.jbang.dev | bash -s - wait_for_database.java -h localhost -p 54323 -d oereb -U gretl -W gretl
