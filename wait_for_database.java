@@ -23,7 +23,7 @@ import java.util.TreeMap;
 public class wait_for_database {
 
     public static void main(String... args) throws IOException, NumberFormatException, InterruptedException {
-        String timeout = "10";
+        String timeout = "60";
         String sleeptime = "5";
         String host = "localhost";
         String port = "5432";
@@ -83,31 +83,21 @@ public class wait_for_database {
             System.exit(2);
         }
 
-//        jdbc:postgresql://server:5432/database
-
         String dburl = "jdbc:postgresql://"+host+":"+port+"/"+database;
-        System.out.println(dburl);
+        System.out.println("Database url: " + dburl);
 
         int timeoutInt = Integer.valueOf(timeout);
         int sleeptimeInt = Integer.valueOf(sleeptime);
         int i=0;
         while ((timeoutInt - i*sleeptimeInt) >= 0) {
-
-
+            try (Connection conn = DriverManager.getConnection(dburl, user, password);) {
+                System.out.println("Connection successful.");
+                break;
+            } catch (SQLException e) {
+                System.err.println((timeoutInt - i*sleeptimeInt) + "s: " + e.getMessage());
+            }
             Thread.sleep(sleeptimeInt * 1000);
-
-            System.out.println(timeoutInt - i*sleeptimeInt);
-
             i++;
         }
-
-        // try (Connection conn = DriverManager.getConnection(dburl, "root", "password"); Statement stmt = conn.createStatement();) {
-        //     ResultSet result = stmt.executeQuery(query);
-
-        //     while (result.next()) System.out.println(result.getString(1));
-
-        // } catch (SQLException e) {
-        //     e.printStackTrace();
-        // }
     }
 }
